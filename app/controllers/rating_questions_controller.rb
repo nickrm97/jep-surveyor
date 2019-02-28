@@ -1,15 +1,19 @@
 class RatingQuestionsController < ApplicationController
-  before_action :find_question, only: [:show, :update, :destroy]
+  before_action :find_question, only: [:show, :update, :destroy, :edit]
 
   def index
     @rating_questions = RatingQuestion.all
+  end
+
+  def show
+    render json: serialize(@rating_question), status: 200
   end
 
   def create
     @rating_question = RatingQuestion.new(question_params)
 
     if @rating_question.save 
-      send_response(201, serialize(@rating_question))      
+      send_response(201, serialize(@rating_question))
     else 
       send_response(422, { 'errors' => @rating_question.errors.messages })
     end
@@ -17,9 +21,17 @@ class RatingQuestionsController < ApplicationController
 
   def destroy
     @rating_question.destroy
-    # send_response(204, nil) if @rating_question.destroy
   end
 
+  def edit
+  end
+
+  def update
+    @rating_question.update(question_params)
+    send_response(200, serialize(@rating_question))
+  end
+
+  private
   def send_response(status, body)
     render json: body, status: status
   end
