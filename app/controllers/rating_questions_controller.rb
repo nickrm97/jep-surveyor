@@ -1,4 +1,6 @@
 class RatingQuestionsController < ApplicationController
+  before_action :find_question, only: [:show, :update, :destroy]
+
   def index
     @rating_questions = RatingQuestion.all
   end
@@ -11,6 +13,11 @@ class RatingQuestionsController < ApplicationController
     else 
       send_response(422, { 'errors' => @rating_question.errors.messages })
     end
+  end
+
+  def destroy
+    @rating_question.destroy
+    # send_response(204, nil) if @rating_question.destroy
   end
 
   def send_response(status, body)
@@ -27,5 +34,13 @@ class RatingQuestionsController < ApplicationController
 
   def question_params
     params.require(:rating_question).permit(:title, :tag)
+  end
+
+  def find_question
+    @rating_question = RatingQuestion.find(params["id"])
+    unless @rating_question
+      head 404
+      return
+    end  
   end
 end
