@@ -1,7 +1,7 @@
 require "rails_helper"
 require "pry"
 
-RSpec.describe "PUT /ratingQuestions/:id" do
+RSpec.describe "PUT /rating_questions/:id" do
   context "when the question exists" do
     it "returns a 200 OK" do
       post "/rating_questions.json", params:{rating_question: { title: "Hello World", tag: "greetings" }} 
