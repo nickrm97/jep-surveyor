@@ -10,6 +10,7 @@ class RatingQuestion extends React.Component<RatingQuestionProps> {
   render() {
     return (
       <div className={styles.ratingQuestion}>{this.props.title}</div>
+      
     )
   }
 }

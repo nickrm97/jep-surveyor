@@ -20,7 +20,7 @@ class RatingQuestionsController < ApplicationController
   end
 
   def show
-    puts "Hello, trying to show something"
+    @rating_question = RatingQuestion.find(params[:id])
   end
 
   private
