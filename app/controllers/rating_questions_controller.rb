@@ -19,6 +19,10 @@ class RatingQuestionsController < ApplicationController
     @rating_question = RatingQuestion.find(params[:id])
   end
 
+  def show
+    puts "Hello, trying to show something"
+  end
+
   private
 
   def question_params
