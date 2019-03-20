@@ -5,7 +5,8 @@ import RatingQuestion from './RatingQuestion'
 
 interface Question {
   id: string,
-  title: string
+  title: string, 
+  url: string
 }
 
 interface RatingQuestionsProps {
@@ -17,7 +18,11 @@ class RatingQuestions extends React.Component<RatingQuestionsProps, {}> {
   render() {
     return(
       <div className={styles.list} data-automation-id='questions-list'>
-        {this.props.questions.map((question) => <RatingQuestion key={question.id} {...question} />)}
+        {this.props.questions.map((question) => 
+        <a href={question.url}>
+          <RatingQuestion key={question.id} {...question} />
+        </a>
+        )}
       </div>
     )
   }

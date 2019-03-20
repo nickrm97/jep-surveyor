@@ -1,9 +1,23 @@
 module RatingQuestionsHelper
   def rating_questions_props
-    RatingQuestionsProps.new(@rating_questions).to_props
+    {
+      questions: @rating_questions.map do |rating_question|
+        {
+          id: rating_question.id.to_s,
+          title: rating_question.title,
+          url: rating_question_url(rating_question)
+        }
+      end
+    }
   end
 
   def rating_question_props
-    RatingQuestionProps.new(@rating_question).to_props
+    {
+      question:
+        {
+          id: @rating_question.id.to_s,
+          title: @rating_question.title
+        }
+    }
   end
 end
