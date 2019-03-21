@@ -1,4 +1,8 @@
 class RatingQuestionsController < ApplicationController
+
+  # before :edit, :show, :destroy do
+  # end 
+
   def index
     @rating_questions = RatingQuestion.all
   end
@@ -23,9 +27,14 @@ class RatingQuestionsController < ApplicationController
     @rating_question = RatingQuestion.find(params[:id])
   end
 
+  def destroy
+    @rating_question = RatingQuestion.find(params[:id]).destroy
+  end
+
   private
 
   def question_params
     params.require(:rating_question).permit(:title)
   end
+
 end
