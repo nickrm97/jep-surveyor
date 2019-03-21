@@ -43,7 +43,6 @@ class RatingQuestions extends React.Component<
             />
           ))}
         </div>
-        <p>Link to create new page</p>
       </div>
     );
   }

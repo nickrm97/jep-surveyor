@@ -11,12 +11,13 @@ interface FormState {}
 class Form extends React.Component<FormProps, FormState> {
   state = { title: this.props.title };
 
-  handleChange = (e: React.FormEvent) => {
-    this.setState({ title: (e.target as HTMLInputElement).value });
+  handleChange = (event: React.FormEvent) => {
+    this.setState({ title: (event.target as HTMLInputElement).value });
   };
 
-  handleSubmit = () => {
+  handleSubmit = (event: React.FormEvent) => {
     console.log(this.state.title);
+    event.preventDefault();
   };
 
   render() {

@@ -1,6 +1,8 @@
 import * as React from "react";
-import * as styles from "./RatingQuestion.module.scss";
 import axios from "axios";
+
+import Form from "./Form";
+import * as styles from "./RatingQuestion.module.scss";
 
 interface RatingQuestionProps {
   id: string;
@@ -11,6 +13,7 @@ interface RatingQuestionProps {
 
 interface RatingQuestionState {
   title: string;
+  formActive: boolean;
 }
 
 class RatingQuestion extends React.Component<
@@ -18,12 +21,19 @@ class RatingQuestion extends React.Component<
   RatingQuestionState
 > {
   state = {
-    title: this.props.title
+    title: this.props.title,
+    formActive: false
   };
 
   changeTitle(title: string) {
     this.setState({ title });
   }
+
+  switchEditForm = () => {
+    this.state.formActive
+      ? this.setState({ formActive: false })
+      : this.setState({ formActive: true });
+  };
 
   handleDelete = () => {
     console.log(this.props.url);
@@ -38,11 +48,24 @@ class RatingQuestion extends React.Component<
       });
   };
 
+  renderEditFormOrQuestion = () => {
+    if (this.state.formActive) {
+      return <Form title={this.state.title} />;
+    } else {
+      return (
+        <div>
+          <a href={this.props.url}>{this.state.title}</a>
+          <button onClick={this.handleEdit}>Edit</button>
+          <button onClick={this.handleDelete}>Delete</button>
+        </div>
+      );
+    }
+  };
+
   render() {
     return (
       <div className={styles.ratingQuestion}>
-        <a href={this.props.url}>{this.state.title}</a>
-        <button onClick={this.handleDelete}>Delete</button>
+        {this.renderEditFormOrQuestion()}
       </div>
     );
   }
