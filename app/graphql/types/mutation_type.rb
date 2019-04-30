@@ -11,6 +11,10 @@ module Types
       argument :id, ID, required: true
     end
 
+    field :delete_question, CreateRatingQuestionResult, null: false do
+      argument :id, ID, required: true
+    end
+
     def create_question(title:)
       RatingQuestion.create(title: title)
     end
@@ -18,6 +22,12 @@ module Types
     def update_question(id:, title:)
       result = RatingQuestion.find(id: id)
       result.update(title: title)
+      result
+    end
+
+    def delete_question(id:)
+      result = RatingQuestion.find(id: id)
+      result.delete
       result
     end
   end
