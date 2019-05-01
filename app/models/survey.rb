@@ -3,6 +3,6 @@
 class Survey
   include Mongoid::Document
   field :name, type: String
-  has_many :rating_question
+  has_many :rating_questions
   validates :name, presence: true
 end

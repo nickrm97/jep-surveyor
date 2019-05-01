@@ -6,4 +6,6 @@ class RatingQuestion
   field :title, type: String
 
   validates :title, presence: true
+
+  belongs_to :survey
 end

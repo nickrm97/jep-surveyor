@@ -4,7 +4,6 @@ module Types
   class MutationType < Types::BaseObject
     field :create_question, CreateRatingQuestionResult, null: false do
       argument :title, String, required: true
-      argument :surveyID
     end
 
     field :update_question, CreateRatingQuestionResult, null: false do
