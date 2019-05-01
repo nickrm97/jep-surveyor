@@ -4,6 +4,7 @@ module Types
   class MutationType < Types::BaseObject
     field :create_question, CreateRatingQuestionResult, null: false do
       argument :title, String, required: true
+      argument :surveyID
     end
 
     field :update_question, CreateRatingQuestionResult, null: false do
@@ -11,7 +12,7 @@ module Types
       argument :id, ID, required: true
     end
 
-    field :delete_question, CreateRatingQuestionResult, null: false do
+    field :delete_question, QuestionType, null: false do
       argument :id, ID, required: true
     end
 
@@ -27,8 +28,10 @@ module Types
 
     def delete_question(id:)
       result = RatingQuestion.find(id: id)
-      result.delete
-      result
+      if result
+        result.destroy
+        result
+      end
     end
   end
 end
