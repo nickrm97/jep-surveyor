@@ -9,7 +9,9 @@ ruby '2.5.1'
 gem 'graphql'
 gem 'rails', '~> 5.2.2'
 
+gem 'jwt'
 gem 'mongoid'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

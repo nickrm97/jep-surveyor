@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User
+  require 'jwt'
   include Mongoid::Document
   include ActiveModel::SecurePassword
 
@@ -9,12 +10,20 @@ class User
   field :password_digest, type: String
   has_secure_password
 
-  # validates :email, presence: true
-  # validates :password, presence: true, length: { minimum: 2 }
+  def token
+    token = JWT.encode payload, private_key, 'HS256'
+  end
 
-  # def validate_password(password:)
-  #   return self if authenticate(password)
+  def payload
+    {
+      email: email,
+      id: id
+    }
+  end
 
-  #   self
-  # end
+  def private_key
+    'hola'
+  end
+
+  
 end
