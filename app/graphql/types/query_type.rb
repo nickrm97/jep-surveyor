@@ -2,14 +2,6 @@
 
 module Types
   class QueryType < Types::BaseObject
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
-
-    field :questions, [QuestionType], null: false
-
-    def questions
-      context[:current_user].account.surveys.all.rating_questions
-    end
 
     field :survey, SurveyType, null: false do
       argument :id, ID, required: true
@@ -26,6 +18,7 @@ module Types
     end
 
     field :user, UserType, null: false
+
 
     def user
       context[:current_user]
