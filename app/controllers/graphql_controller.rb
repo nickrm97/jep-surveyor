@@ -1,16 +1,19 @@
+# frozen_string_literal: true
+
 class GraphqlController < ApplicationController
   def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+    token = request.headers['token']
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: get_user_by_token(token)
     }
     result = SurveyorSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
-  rescue => e
+  rescue StandardError => e
     raise e unless Rails.env.development?
+
     handle_error_in_development e
   end
 
@@ -39,5 +42,16 @@ class GraphqlController < ApplicationController
     logger.error e.backtrace.join("\n")
 
     render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
+  end
+
+  def get_user_by_token(token)
+    return if token.nil?
+    decoded_token = JWT.decode token, private_key, 'HS256'
+    User.find(decoded_token.first['id'])
+  end
+
+  # TODO: pull this out into an ENV 
+  def private_key
+    'muybiengraciasytu'
   end
 end

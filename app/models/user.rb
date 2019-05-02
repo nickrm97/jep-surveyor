@@ -22,8 +22,6 @@ class User
   end
 
   def private_key
-    'hola'
+    'muybiengraciasytu'
   end
-
-  
 end
