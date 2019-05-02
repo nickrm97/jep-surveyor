@@ -5,7 +5,7 @@ module Types
     possible_types SuccessfulLoginResult, FailedLoginResult
 
     def self.resolve_type(object, _context)
-      if object.persisted?
+      if object
         SuccessfulLoginResult
       else
         FailedLoginResult

@@ -42,7 +42,8 @@ module Types
     end
 
     def login(email:, password:)
-      User.find(email: email)
+      user = User.find_by(email: email)
+      user.authenticate(password)
     end
   end
 end

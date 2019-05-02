@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Types
   class FailedLoginResult < Types::BaseObject
-    field :errors, [String], null: false
+    field :errors, String, null: false
 
     def errors
-      object.errors.full_messages
+      'muy malo --- wrong password'
     end
   end
 end

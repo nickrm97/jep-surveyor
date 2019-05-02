@@ -9,5 +9,12 @@ class User
   field :password_digest, type: String
   has_secure_password
 
-  validates :email, presence: true
+  # validates :email, presence: true
+  # validates :password, presence: true, length: { minimum: 2 }
+
+  # def validate_password(password:)
+  #   return self if authenticate(password)
+
+  #   self
+  # end
 end
