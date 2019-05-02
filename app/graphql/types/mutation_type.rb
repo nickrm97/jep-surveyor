@@ -45,5 +45,15 @@ module Types
       user = User.find_by(email: email)
       user.authenticate(password)
     end
+
+    field :create_user, LoginResult, null: false do
+      argument :email, String, required: true
+      argument :password, String, required: true
+    end
+
+    def create_user(email:, password:)
+      User.create(email: email, password: password)
+    end
+
   end
 end

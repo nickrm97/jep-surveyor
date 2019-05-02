@@ -19,7 +19,6 @@ module Types
 
     field :user, UserType, null: false
 
-
     def user
       context[:current_user]
     end
