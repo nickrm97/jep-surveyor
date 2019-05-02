@@ -5,6 +5,7 @@ class User
   include Mongoid::Document
   include ActiveModel::SecurePassword
 
+  belongs_to :account
   field :email, type: String
 
   field :password_digest, type: String

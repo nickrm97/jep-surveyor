@@ -8,7 +8,7 @@ module Types
     field :questions, [QuestionType], null: false
 
     def questions
-      RatingQuestion.all
+      context[:current_user].account.surveys.all.rating_questions
     end
 
     field :survey, SurveyType, null: false do
@@ -16,13 +16,13 @@ module Types
     end
 
     def survey(id:)
-      Survey.find(id: id)
+      context[:current_user].account.surveys.find(id: id)
     end
 
     field :surveys, [SurveyType], null: false
 
     def surveys
-      Survey.all
+      context[:current_user].account.surveys
     end
 
     field :user, UserType, null: false
